@@ -32,5 +32,4 @@ public class LottoController {
         List<Lotto> tickets = lottoGenerator.generateLottoTickets(count);
         outputView.printLottoNumbers(tickets);
     }
-
 }
