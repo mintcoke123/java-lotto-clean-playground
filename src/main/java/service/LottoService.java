@@ -41,11 +41,18 @@ public class LottoService {
         return false;
     }
 
+    public int plusIfTargetNumberContained(List<Integer> lottoNumbers, int targetNumber) {
+        if(lottoNumbers.contains(targetNumber)) {
+            return 1;
+        }
+        return 0;
+    }
+
     public int countTargetNumberContained(Lotto lotto, List<Integer> targetNumbers) {
         List<Integer> lottoNumbers = lotto.getNumbers();
         int count = 0;
         for(Integer targetNumber :targetNumbers){
-            count += lottoNumbers.contains(targetNumber) ? 1 : 0;
+            count += plusIfTargetNumberContained(lottoNumbers, targetNumber);
         }
         return count;
     }
