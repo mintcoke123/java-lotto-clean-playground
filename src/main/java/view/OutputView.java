@@ -1,5 +1,7 @@
 package view;
 
+import domain.Lotto;
+
 import java.util.List;
 
 public class OutputView {
@@ -9,9 +11,7 @@ public class OutputView {
 
 
 
-    public void printLottoNumbers(List<List<Integer>> lottoTickets) {
-        for (List<Integer> ticket : lottoTickets) {
-            System.out.println(ticket);
-        }
+    public void printLottoNumbers(List<Lotto> lottoTickets) {
+        for (Lotto ticket : lottoTickets) System.out.println(ticket);
     }
 }

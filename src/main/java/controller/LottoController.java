@@ -30,15 +30,7 @@ public class LottoController {
         outputView.printPurchasedTicketsMessage(count);
 
         List<Lotto> tickets = lottoGenerator.generateLottoTickets(count);
-        List<List<Integer>> ticketsAsNumbers = toNumberLists(tickets);
-        outputView.printLottoNumbers(ticketsAsNumbers);
+        outputView.printLottoNumbers(tickets);
     }
 
-    private List<List<Integer>> toNumberLists(List<Lotto> tickets) {
-        List<List<Integer>> result = new ArrayList<>();
-        for (Lotto ticket : tickets) {
-            result.add(ticket.getNumbers());
-        }
-        return result;
-    }
 }
