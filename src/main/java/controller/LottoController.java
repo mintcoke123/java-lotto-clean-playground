@@ -23,7 +23,7 @@ public class LottoController {
     }
 
     public void run() {
-        System.out.println("구입금액을 입력해 주세요.");
+        outputView.printPurchaseMessage();
         int money = inputView.getInputMoney();
 
         int count = MoneyToTicket.moneyToTicket(money, PRICE_PER_TICKET);
