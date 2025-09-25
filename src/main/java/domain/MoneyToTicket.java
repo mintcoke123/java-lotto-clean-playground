@@ -1,7 +1,7 @@
 package domain;
 
 public class MoneyToTicket {
-    public static int moneyToTicket(int money) {
-        return money / 1000;
+    public static int moneyToTicket(int money, int price) {
+        return money / price;
     }
 }
