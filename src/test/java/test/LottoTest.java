@@ -8,7 +8,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class LottoTest {
+class LottoTest {
 
     @Test
     void 숫자_6개_중복없고_범위내면_생성된다() {
