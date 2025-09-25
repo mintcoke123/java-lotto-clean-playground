@@ -2,7 +2,7 @@ package controller;
 
 import domain.MoneyToTicket;
 import domain.Lotto;
-import domain.ParseInputTargetToTarget;
+import domain.ParseInputStringToNumbers;
 import generator.LottoGenerator;
 import service.LottoService;
 import view.InputView;
@@ -38,7 +38,7 @@ public class LottoController {
         // 3) 당첨 번호 입력
         outputView.printTargetNumberMessage();
         String inputTargetNumbers = inputView.getInputTargetNumber();
-        List<Integer> targetNumbers = ParseInputTargetToTarget.parse(inputTargetNumbers);
+        List<Integer> targetNumbers = ParseInputStringToNumbers.parse(inputTargetNumbers);
 
         // 4) 수익률
         LottoService lottoService = new LottoService();

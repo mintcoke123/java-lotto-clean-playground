@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class ParseInputTargetToTarget {
+public class ParseInputStringToNumbers {
     public static List<Integer> parse(String line) {
         return Arrays.stream(line.split(","))
                 .map(String::trim)
