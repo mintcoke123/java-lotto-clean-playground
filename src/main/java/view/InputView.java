@@ -6,6 +6,7 @@ public class InputView {
     Scanner scanner = new Scanner(System.in);
     public int getInputMoney() {
         int inputMoney =  scanner.nextInt();
+        scanner.nextLine();
         return inputMoney;
     }
 
