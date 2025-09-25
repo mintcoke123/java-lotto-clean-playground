@@ -24,11 +24,11 @@ public class OutputView {
     }
 
     public void printResultMessage(int correctNumber, int price, int count){
-        System.out.println(correctNumber + "개 일치 (" + price + "원)- " + count + "개";
+        System.out.println(correctNumber + "개 일치 (" + price + "원)- " + count + "개");
     }
 
-    public void printTotalBenefitResultMessage(float totalBenefit){
-        System.out.println("총 수익률은 "+totalBenefit+"입니다.");
+    public void printTotalBenefitResultMessage(double totalBenefit) {
+        System.out.printf("총 수익률은 %.2f입니다.", totalBenefit);
     }
 
     public void printLottoNumbers(List<Lotto> lottoTickets) {

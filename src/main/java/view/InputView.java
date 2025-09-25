@@ -8,4 +8,9 @@ public class InputView {
         int inputMoney =  scanner.nextInt();
         return inputMoney;
     }
+
+    public String getInputTargetNumber() {
+        String inputTargetNumber = scanner.nextLine().trim();
+        return inputTargetNumber;
+    }
 }
