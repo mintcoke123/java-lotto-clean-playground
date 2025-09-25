@@ -10,6 +10,10 @@ public class OutputView {
         System.out.println(tickets + "개를 구매했습니다.");
     }
 
+    public void printPurchaseMessage(){
+        System.out.println("구입금액을 입력해 주세요.");
+    }
+
 
 
     public void printLottoNumbers(List<Lotto> lottoTickets) {
