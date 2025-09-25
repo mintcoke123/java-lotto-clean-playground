@@ -46,10 +46,10 @@ public class LottoController {
 
         // 5) 출력
         outputView.printStatusMessage();
-        outputView.printResultMessage(3,  5000,       result.threeMatchCount);
-        outputView.printResultMessage(4,  50000,      result.fourMatchCount);
-        outputView.printResultMessage(5,  1500000,    result.fiveMatchCount);
-        outputView.printResultMessage(6,  2000000000, result.sixMatchCount);
+        outputView.printResultMessage(3, 5000, result.threeMatchCount);
+        outputView.printResultMessage(4, 50000, result.fourMatchCount);
+        outputView.printResultMessage(5, 1500000, result.fiveMatchCount);
+        outputView.printResultMessage(6, 2000000000, result.sixMatchCount);
         outputView.printTotalBenefitResultMessage(result.earningRate);
     }
 }
