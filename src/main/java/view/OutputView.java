@@ -7,7 +7,7 @@ import java.util.List;
 public class OutputView {
     public void printPurchasedTicketsMessage(int tickets){
         System.out.println();
-        System.out.println(tickets + "개를 구매했습니다.");
+        System.out.printf("%d개를 구매했습니다.",tickets);
     }
 
     public void printPurchaseMessage(){
@@ -23,8 +23,8 @@ public class OutputView {
         System.out.println("---------");
     }
 
-    public void printResultMessage(int correctNumber, int price, int count){
-        System.out.println(correctNumber + "개 일치 (" + price + "원)- " + count + "개");
+    public void printResultMessage(int correctNumber, int price, int count) {
+        System.out.printf("%d개 일치 (%d원) - %d개%n", correctNumber, price, count);
     }
 
     public void printTotalBenefitResultMessage(double totalBenefit) {
