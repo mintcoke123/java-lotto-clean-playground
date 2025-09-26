@@ -1,6 +1,6 @@
 package controller;
 
-import domain.MoneyToTicket;
+import domain.CalculateTicketCount;
 import domain.Lotto;
 import domain.ParseInputStringToNumbers;
 import generator.LottoGenerator;
@@ -30,7 +30,7 @@ public class LottoController {
         int money = inputView.getInputMoney();
 
         // 2) 티켓 생성 및 출력
-        int count = MoneyToTicket.moneyToTicket(money, PRICE_PER_TICKET);
+        int count = CalculateTicketCount.calculateTicketCount(money, PRICE_PER_TICKET);
         outputView.printPurchasedTicketsMessage(count);
 
         List<Lotto> tickets = lottoGenerator.generateLottoTickets(count);

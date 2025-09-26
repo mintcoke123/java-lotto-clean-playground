@@ -52,7 +52,7 @@ class LottoServiceTest {
         assertEquals(5_000,         lottoService.correctCountToPrize(3));
         assertEquals(50_000,        lottoService.correctCountToPrize(4));
         assertEquals(1_500_000,     lottoService.correctCountToPrize(5));
-        assertEquals(2_000000_000, lottoService.correctCountToPrize(6));
+        assertEquals(2_000_000_000, lottoService.correctCountToPrize(6));
     }
 
     @Test
