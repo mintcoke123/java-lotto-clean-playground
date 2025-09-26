@@ -2,9 +2,10 @@ package domain;
 
 import java.util.*;
 
+import static constants.LottoConstants.ALL_LOTTO_NUMBER_SIZE;
+import static constants.LottoConstants.LOTTO_NUMBER_SIZE;
+
 public class Lotto {
-    private static final int LOTTO_NUMBER_SIZE = 6;
-    private static final int MAX = 45;
 
     private final List<Integer> numbers;
 
@@ -21,7 +22,7 @@ public class Lotto {
             throw new IllegalArgumentException("중복된 번호가 있습니다.");
         }
         for (int n : numbers) {
-            if (n < 1 || n > MAX) {
+            if (n < 1 || n > ALL_LOTTO_NUMBER_SIZE) {
                 throw new IllegalArgumentException("번호는 1이상 45이하 범위여야 합니다.");
             }
         }

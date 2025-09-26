@@ -6,10 +6,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class LottoGenerator {
+import static constants.LottoConstants.ALL_LOTTO_NUMBER_SIZE;
+import static constants.LottoConstants.LOTTO_NUMBER_SIZE;
 
-    private static final int ALL_LOTTO_NUMBER_SIZE = 45;
-    private static final int LOTTO_NUMBER_SIZE = 6;
+public class LottoGenerator {
 
     public Lotto generateLottoNumbers() {
         List<Integer> allLottoNumbers = generateAllLottoNumbers();

@@ -12,7 +12,7 @@ public class LottoService {
         public int fiveMatchCount;
         public int sixMatchCount;
         public long totalPrizeAmount;
-        public float earningRate;   // 출력에서 double로 받아도 자동 승격됩니다.
+        public float earningRate;
     }
 
     public Result calculate(List<Lotto> tickets, List<Integer> targetNumbers, int paidAmount) {
@@ -33,13 +33,7 @@ public class LottoService {
         return result;
     }
 
-    public boolean isTargetNumberContained(Lotto lotto, int targetNumber) {
-        List<Integer> lottoNumbers = lotto.getNumbers();
-        if(lottoNumbers.contains(targetNumber)) {
-            return true;
-        }
-        return false;
-    }
+
 
     public int plusIfTargetNumberContained(List<Integer> lottoNumbers, int targetNumber) {
         if(lottoNumbers.contains(targetNumber)) {
