@@ -12,7 +12,7 @@ public class LottoService {
         public int fiveMatchCount;
         public int sixMatchCount;
         public long totalPrizeAmount;
-        public float earningRate;
+        public float returnRate;
     }
 
     public Result calculate(List<Lotto> tickets, List<Integer> targetNumbers, int paidAmount) {
@@ -29,7 +29,7 @@ public class LottoService {
             result.totalPrizeAmount += correctCountToPrize(matched);
         }
 
-        result.earningRate = earningRate(paidAmount, (int) result.totalPrizeAmount);
+        result.returnRate = returnRate(paidAmount, (int) result.totalPrizeAmount);
         return result;
     }
 
@@ -60,8 +60,8 @@ public class LottoService {
         return 0;
     }
 
-    public float earningRate(int inputmoney, int outputmoney) {
-        return (float) outputmoney / inputmoney;
+    public float returnRate(int paidAmount, int prizeAmount) {
+        return (float) paidAmount / prizeAmount;
     }
 
 
