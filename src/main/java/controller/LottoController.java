@@ -11,9 +11,9 @@ import view.OutputView;
 
 import java.util.List;
 
-import static constants.LottoConstants.*;
-
 public class LottoController {
+    private static final int PRICE_PER_TICKET = 1000;
+
 
     private final InputView inputView;
     private final OutputView outputView;
