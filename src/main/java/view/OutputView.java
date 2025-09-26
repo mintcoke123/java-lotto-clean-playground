@@ -41,4 +41,19 @@ public class OutputView {
         System.out.println();
     }
 
+    public void printInvalidLottoSizeMessage() {
+        System.out.println("[ERROR] 로또 번호는 6개여야 합니다.");
+    }
+
+    public void printDuplicateLottoNumberMessage() {
+        System.out.println("[ERROR] 중복된 번호가 있습니다.");
+    }
+
+    public void printOutOfRangeLottoNumberMessage() {
+        System.out.println("[ERROR] 번호는 1이상 45이하 범위여야 합니다.");
+    }
+
+    public void printInvalidPurchaseAmountMessage() {
+        System.out.println("[ERROR] 금액은 자연수여야 합니다.");
+    }
 }
