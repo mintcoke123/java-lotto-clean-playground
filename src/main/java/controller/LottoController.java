@@ -2,6 +2,7 @@ package controller;
 
 import domain.CalculateTicketCount;
 import domain.Lotto;
+import domain.MatchReward;
 import domain.ParseInputStringToNumbers;
 import generator.LottoGenerator;
 import service.LottoService;
@@ -10,7 +11,7 @@ import view.OutputView;
 
 import java.util.List;
 
-import static constants.LottoConstants.PRICE_PER_TICKET;
+import static constants.LottoConstants.*;
 
 public class LottoController {
 
@@ -47,10 +48,10 @@ public class LottoController {
 
         // 5) 출력
         outputView.printStatusMessage();
-        outputView.printResultMessage(3, 5000, result.threeMatchCount);
-        outputView.printResultMessage(4, 50000, result.fourMatchCount);
-        outputView.printResultMessage(5, 1500000, result.fiveMatchCount);
-        outputView.printResultMessage(6, 2000000000, result.sixMatchCount);
-        outputView.printTotalBenefitResultMessage(result.earningRate);
+        outputView.printResultMessage(3, MatchReward.THREE.getPrize(), result.threeMatchCount);
+        outputView.printResultMessage(4, MatchReward.FOUR.getPrize(),  result.fourMatchCount);
+        outputView.printResultMessage(5, MatchReward.FIVE.getPrize(),  result.fiveMatchCount);
+        outputView.printResultMessage(6, MatchReward.SIX.getPrize(),   result.sixMatchCount);
+        outputView.printTotalBenefitResultMessage(result.returnRate);
     }
 }

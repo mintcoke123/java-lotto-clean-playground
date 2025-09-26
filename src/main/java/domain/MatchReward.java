@@ -26,4 +26,8 @@ public enum MatchReward {
         return NONE;
     }
 
+    public int getPrize() {
+        return prize;
+    }
+
 }
