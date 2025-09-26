@@ -1,6 +1,7 @@
 package test;
 
 import domain.Lotto;
+import domain.MatchReward;
 import org.junit.jupiter.api.Test;
 import service.LottoService;
 
@@ -42,17 +43,17 @@ class LottoServiceTest {
         assertEquals(2_000_010_000L, result.totalPrizeAmount);
 
         // 수익률 = 2,000,010,000 / 4,000 = 500002.5
-        assertEquals(500_002.5f, result.earningRate, 0.0001f);
+        assertEquals(500_002.5f, result.returnRate, 0.0001f);
     }
 
     @Test
     void correctCountToPrize_매핑() {
-        LottoService lottoService = new LottoService();
-        assertEquals(0,             lottoService.correctCountToPrize(0));
-        assertEquals(5_000,         lottoService.correctCountToPrize(3));
-        assertEquals(50_000,        lottoService.correctCountToPrize(4));
-        assertEquals(1_500_000,     lottoService.correctCountToPrize(5));
-        assertEquals(2_000_000_000, lottoService.correctCountToPrize(6));
+        assertEquals(MatchReward.NONE,  MatchReward.of(0));
+        assertEquals(MatchReward.THREE, MatchReward.of(3));
+        assertEquals(MatchReward.FOUR,  MatchReward.of(4));
+        assertEquals(MatchReward.FIVE,  MatchReward.of(5));
+        assertEquals(MatchReward.SIX,   MatchReward.of(6));
+
     }
 
     @Test
