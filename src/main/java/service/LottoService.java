@@ -1,6 +1,8 @@
 package service;
 
 import domain.Lotto;
+import domain.MatchReward;
+import static constants.LottoConstants.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,12 +23,13 @@ public class LottoService {
         for (Lotto ticket : tickets) {
             int matched = countTargetNumberContained(ticket, targetNumbers);
 
-            if (matched == 3) result.threeMatchCount++;
-            if (matched == 4) result.fourMatchCount++;
-            if (matched == 5) result.fiveMatchCount++;
-            if (matched == 6) result.sixMatchCount++;
+            MatchReward reward = MatchReward.of(matched);
+            if (reward == MatchReward.THREE) result.threeMatchCount++;
+            if (reward == MatchReward.FOUR) result.fourMatchCount++;
+            if (reward == MatchReward.FIVE) result.fiveMatchCount++;
+            if (reward == MatchReward.SIX) result.sixMatchCount++;
 
-            result.totalPrizeAmount += correctCountToPrize(matched);
+            result.totalPrizeAmount += rewardToPrize(reward);
         }
 
         result.returnRate = returnRate(paidAmount, (int) result.totalPrizeAmount);
@@ -57,6 +60,14 @@ public class LottoService {
         if (correctCount == 4) return 50000;
         if (correctCount == 5) return 1500000;
         if (correctCount == 6) return 2000000000;
+        return 0;
+    }
+
+    public int rewardToPrize(MatchReward reward) {
+        if (reward == MatchReward.THREE) return MATCH_THREE_PRIZE;
+        if (reward == MatchReward.FOUR) return MATCH_FOUR_PRIZE;
+        if (reward == MatchReward.FIVE) return MATCH_FIVE_PRIZE;
+        if (reward == MatchReward.SIX) return MATCH_SIX_PRIZE;
         return 0;
     }
 
