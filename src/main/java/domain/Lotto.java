@@ -2,10 +2,9 @@ package domain;
 
 import java.util.*;
 
-import static constants.LottoConstants.ALL_LOTTO_NUMBER_SIZE;
-import static constants.LottoConstants.LOTTO_NUMBER_SIZE;
-
 public class Lotto {
+    public static final int LOTTO_NUMBER_SIZE = 6;
+    public static final int ALL_LOTTO_NUMBER_SIZE = 45;
 
     private final List<Integer> numbers;
 
