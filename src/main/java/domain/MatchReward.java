@@ -1,7 +1,5 @@
 package domain;
 
-import static constants.LottoConstants.*;
-
 public enum MatchReward {
     THREE(3,5000),
     FOUR(4,50000),

@@ -25,7 +25,7 @@ class LottoGeneratorTest {
         LottoGenerator generator = new LottoGenerator();
 
         // when
-        Lotto lotto = generator.generateLottoNumbers();
+        Lotto lotto = new Lotto(generator.generateSixLottoNumber());
         List<Integer> numbers = lotto.getNumbers();
 
         // then
