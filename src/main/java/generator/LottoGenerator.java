@@ -19,13 +19,12 @@ public class LottoGenerator {
 
     public List<Integer> generateSixLottoNumber() {
         Random random = new Random();
-        Set<Integer> LottoNumberSet = new HashSet<>();
+        Set<Integer> LottoNumberSet = new TreeSet<>();
 
         while (LottoNumberSet.size() < LOTTO_NUMBER_SIZE) {
             LottoNumberSet.add(random.nextInt(ALL_LOTTO_NUMBER_SIZE) + 1);
         }
         List<Integer> lottoNumbers = new ArrayList<>(LottoNumberSet);
-        Collections.sort(lottoNumbers);
         return lottoNumbers;
     }
 
