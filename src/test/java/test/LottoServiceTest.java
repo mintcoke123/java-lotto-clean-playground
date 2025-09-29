@@ -3,7 +3,7 @@ package test;
 import domain.Lotto;
 import domain.MatchReward;
 import org.junit.jupiter.api.Test;
-import service.LottoService;
+import domain.LottoPrizeCalculator;
 
 import java.util.Arrays;
 import java.util.List;
@@ -27,11 +27,11 @@ class LottoServiceTest {
         );
         int paidAmount = purchasedTickets.size() * 1000; // 4000원
 
-        LottoService lottoService = new LottoService();
+        LottoPrizeCalculator lottoPrizeCalculator = new LottoPrizeCalculator();
 
         // when
-        LottoService.Result result =
-                lottoService.calculate(purchasedTickets, winningNumbers, paidAmount);
+        LottoPrizeCalculator.Result result =
+                lottoPrizeCalculator.calculate(purchasedTickets, winningNumbers, paidAmount);
 
         // then
         assertEquals(2, result.threeMatchCount);
@@ -56,11 +56,4 @@ class LottoServiceTest {
 
     }
 
-    @Test
-    void countTargetNumberContained_정상동작() {
-        LottoService lottoService = new LottoService();
-        Lotto ticket = new Lotto(Arrays.asList(1, 2, 3, 10, 11, 12));
-        List<Integer> winningNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
-        assertEquals(3, lottoService.countTargetNumberContained(ticket, winningNumbers));
-    }
 }

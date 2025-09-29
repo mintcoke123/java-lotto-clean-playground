@@ -1,12 +1,8 @@
-package service;
+package domain;
 
-import domain.Lotto;
-import domain.MatchReward;
-
-import java.util.ArrayList;
 import java.util.List;
 
-public class LottoService {
+public class LottoPrizeCalculator {
     public static class Result {
         public int threeMatchCount;
         public int fourMatchCount;
@@ -20,7 +16,7 @@ public class LottoService {
         Result result = new Result();
 
         for (Lotto ticket : tickets) {
-            int matched = countTargetNumberContained(ticket, targetNumbers);
+            int matched = ticket.countMatches(targetNumbers);
 
             MatchReward reward = MatchReward.of(matched);
             if (reward == MatchReward.THREE) result.threeMatchCount++;
@@ -36,21 +32,6 @@ public class LottoService {
     }
 
 
-    public int plusIfTargetNumberContained(List<Integer> lottoNumbers, int targetNumber) {
-        if(lottoNumbers.contains(targetNumber)) {
-            return 1;
-        }
-        return 0;
-    }
-
-    public int countTargetNumberContained(Lotto lotto, List<Integer> targetNumbers) {
-        List<Integer> lottoNumbers = lotto.getNumbers();
-        int count = 0;
-        for(Integer targetNumber :targetNumbers){
-            count += plusIfTargetNumberContained(lottoNumbers, targetNumber);
-        }
-        return count;
-    }
 
 
     public int rewardToPrize(MatchReward reward) {

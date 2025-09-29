@@ -13,6 +13,13 @@ public class Lotto {
         this.numbers = numbers;
     }
 
+    public int countMatches(List<Integer> targetNumbers) {
+        int count = 0;
+        for (int singleTargetNumber : targetNumbers)
+            if (numbers.contains(singleTargetNumber)) count++;
+        return count;
+    }
+
     private void validate(List<Integer> numbers) {
         if (numbers.size() != LOTTO_NUMBER_SIZE) {
             throw new IllegalArgumentException("로또 번호는 6개여야 합니다.");

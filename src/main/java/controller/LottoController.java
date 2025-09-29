@@ -5,7 +5,7 @@ import domain.Lotto;
 import domain.MatchReward;
 import domain.ParseInputStringToNumbers;
 import generator.LottoGenerator;
-import service.LottoService;
+import domain.LottoPrizeCalculator;
 import view.InputView;
 import view.OutputView;
 
@@ -39,8 +39,8 @@ public class LottoController {
         List<Integer> winningNumbers = getValidWinningNumbers();
 
         // 4) 수익률
-        LottoService lottoService = new LottoService();
-        LottoService.Result result = lottoService.calculate(purchasedTickets, winningNumbers, purchaseAmount);
+        LottoPrizeCalculator lottoPrizeCalculator = new LottoPrizeCalculator();
+        LottoPrizeCalculator.Result result = lottoPrizeCalculator.calculate(purchasedTickets, winningNumbers, purchaseAmount);
 
         outputView.printStatusMessage();
         outputView.printResultMessage(3, MatchReward.THREE.getPrize(), result.threeMatchCount);
