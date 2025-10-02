@@ -7,12 +7,10 @@ public class Lotto {
     public static final int ALL_LOTTO_NUMBER_SIZE = 45;
 
     private final List<Integer> numbers;
-    private final int bonusNumber;
 
-    public Lotto(List<Integer> numbers, int bonusNumber) {
+    public Lotto(List<Integer> numbers) {
         validate(numbers);
         this.numbers = numbers;
-        this.bonusNumber = bonusNumber;
     }
 
     public int countMatches(List<Integer> targetNumbers) {
