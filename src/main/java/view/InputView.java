@@ -1,5 +1,9 @@
 package view;
 
+import domain.Lotto;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class InputView {
@@ -13,6 +17,15 @@ public class InputView {
     public String getInputTargetNumber() {
         String inputTargetNumber = scanner.nextLine().trim();
         return inputTargetNumber;
+    }
+
+    public List<String> getInputManualLottoNumbers(int ManualLottoCount) {
+        List<String> inputManualLottoNumbers = new ArrayList<>();
+        for(int i = 0; i < ManualLottoCount; i++) {
+            String inputManualLottoNumber = scanner.nextLine().trim();
+            inputManualLottoNumbers.add(inputManualLottoNumber);
+        }
+        return inputManualLottoNumbers;
     }
 
     public int getInputBonusNumber(){
