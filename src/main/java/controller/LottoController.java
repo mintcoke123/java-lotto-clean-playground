@@ -35,17 +35,22 @@ public class LottoController {
         List<Lotto> purchasedTickets = lottoGenerator.generateLottoTickets(purchasedTicketCount);
         outputView.printLottoNumbers(purchasedTickets);
 
-        // 3) 당첨 번호 입력
+        // 3-1) 당첨 번호 입력
         List<Integer> winningNumbers = getValidWinningNumbers();
+
+        // 3-2) 보너스 번호 입력
+        outputView.printBonusNumberMessage();
+        int bonusNumber = inputView.getInputBonusNumber();
 
         // 4) 수익률
         LottoPrizeCalculator lottoPrizeCalculator = new LottoPrizeCalculator();
-        LottoPrizeCalculator.Result result = lottoPrizeCalculator.calculate(purchasedTickets, winningNumbers, purchaseAmount);
+        LottoPrizeCalculator.Result result = lottoPrizeCalculator.calculate(purchasedTickets, winningNumbers, purchaseAmount,bonusNumber);
 
         outputView.printStatusMessage();
         outputView.printResultMessage(3, MatchReward.THREE.getPrize(), result.threeMatchCount);
         outputView.printResultMessage(4, MatchReward.FOUR.getPrize(), result.fourMatchCount);
         outputView.printResultMessage(5, MatchReward.FIVE.getPrize(), result.fiveMatchCount);
+        outputView.printBonusResultMessage(5,MatchReward.BONUSFIVE.getPrize(), result.fiveBonusMatchCount);
         outputView.printResultMessage(6, MatchReward.SIX.getPrize(), result.sixMatchCount);
         outputView.printTotalBenefitResultMessage(result.returnRate);
     }
