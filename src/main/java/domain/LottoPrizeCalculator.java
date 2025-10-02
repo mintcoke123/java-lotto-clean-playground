@@ -24,7 +24,7 @@ public class LottoPrizeCalculator {
             int matched = ticket.countMatches(winningNumbers);
             boolean bonusNumberMatched = ticket.isBonusNumberMatched(bonusNumber);
 
-            MatchReward reward = MatchReward.of(matched,bonusNumberMatched);
+            MatchReward reward = MatchReward.of(matched, bonusNumberMatched);
             if (reward == MatchReward.THREE) result.threeMatchCount++;
             if (reward == MatchReward.FOUR)  result.fourMatchCount++;
             if (reward == MatchReward.FIVE)  result.fiveMatchCount++;
@@ -38,17 +38,11 @@ public class LottoPrizeCalculator {
         return result;
     }
 
-
-
     public int rewardToPrize(MatchReward reward) {
         return reward.getPrize();
     }
 
-
-
     public float returnRate(int paidAmount, int prizeAmount) {
-        return (float) prizeAmount/paidAmount;
+        return (float) prizeAmount / paidAmount;
     }
-
-
 }

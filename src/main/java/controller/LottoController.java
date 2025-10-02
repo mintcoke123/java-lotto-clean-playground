@@ -16,7 +16,6 @@ import java.util.List;
 public class LottoController {
     private static final int PRICE_PER_TICKET = 1000;
 
-
     private final InputView inputView;
     private final OutputView outputView;
     private final AutoLottoTicketsGenerator lottoGenerator;
@@ -31,10 +30,11 @@ public class LottoController {
         Money purchaseAmount = getValidPurchaseAmount();
         List<Lotto> purchasedTickets = getValidPurchasedTickets(purchaseAmount);
         WinningNumbers winningNumbers = getValidWinningNumbers();
-        BonusNumber bonusNumber= getValidBonusNumber(winningNumbers);
+        BonusNumber bonusNumber = getValidBonusNumber(winningNumbers);
 
         LottoPrizeCalculator lottoPrizeCalculator = new LottoPrizeCalculator();
-        LottoPrizeCalculator.Result result = lottoPrizeCalculator.calculate(purchasedTickets, winningNumbers, purchaseAmount,bonusNumber);
+        LottoPrizeCalculator.Result result =
+                lottoPrizeCalculator.calculate(purchasedTickets, winningNumbers, purchaseAmount, bonusNumber);
 
         printResult(result);
     }

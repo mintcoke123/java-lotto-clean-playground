@@ -2,7 +2,6 @@ package domain;
 
 import domain.value.BonusNumber;
 import domain.value.WinningNumbers;
-
 import java.util.*;
 
 public class Lotto {
@@ -16,7 +15,7 @@ public class Lotto {
         this.numbers = numbers;
     }
 
-    public boolean isBonusNumberMatched (BonusNumber bonusNumber){
+    public boolean isBonusNumberMatched(BonusNumber bonusNumber) {
         return numbers.contains(bonusNumber.value());
     }
 
