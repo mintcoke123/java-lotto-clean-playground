@@ -60,25 +60,11 @@ public class OutputView {
         System.out.println();
     }
 
-
-
-    public void printInvalidLottoSizeMessage() {
-        System.out.println("[ERROR] 로또 번호는 6개여야 합니다.");
+    public void printErrorMessage(String message) {
+        System.out.println("[ERROR] " + message);
     }
 
-    public void printDuplicateLottoNumberMessage() {
-        System.out.println("[ERROR] 중복된 번호가 있습니다.");
-    }
 
-    public void printOutOfRangeLottoNumberMessage() {
-        System.out.println("[ERROR] 번호는 1이상 45이하 범위여야 합니다.");
-    }
 
-    public void printInvalidPurchaseAmountMessage() {
-        System.out.println("[ERROR] 금액은 자연수여야 합니다.");
-    }
 
-    public void printInvalidManualCountMessage(){
-        System.out.println("[ERROR] 수동 로또 티켓의 갯수가 유효하지 않습니다.");
-    }
 }

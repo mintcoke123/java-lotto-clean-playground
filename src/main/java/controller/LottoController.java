@@ -1,11 +1,7 @@
 package controller;
 
-import domain.CalculateTicketCount;
-import domain.Lotto;
-import domain.MatchReward;
-import domain.ParseInputStringToNumbers;
+import domain.*;
 import generator.AutoLottoTicketsGenerator;
-import domain.LottoPrizeCalculator;
 import generator.ManualLottoTicketsGenerator;
 import view.InputView;
 import view.OutputView;
@@ -28,10 +24,10 @@ public class LottoController {
     }
 
     public void run() {
-        int purchaseAmount = getValidPurchaseAmount();
+        Money purchaseAmount = getValidPurchaseAmount();
         List<Lotto> purchasedTickets = getValidPurchasedTickets(purchaseAmount);
-        List<Integer> winningNumbers = getValidWinningNumbers();
-        int bonusNumber = getValidBonusNumber(winningNumbers);
+        WinningNumbers winningNumbers = getValidWinningNumbers();
+        BonusNumber bonusNumber= getValidBonusNumber(winningNumbers);
 
         LottoPrizeCalculator lottoPrizeCalculator = new LottoPrizeCalculator();
         LottoPrizeCalculator.Result result = lottoPrizeCalculator.calculate(purchasedTickets, winningNumbers, purchaseAmount,bonusNumber);
@@ -49,24 +45,22 @@ public class LottoController {
         outputView.printTotalBenefitResultMessage(result.returnRate);
     }
 
-    private int getValidBonusNumber(List<Integer> winningNumbers) {
+    private BonusNumber getValidBonusNumber(WinningNumbers winningNumbers) {
         while (true) {
             outputView.printBonusNumberMessage();
-            int bonus = inputView.getInputBonusNumber();
-            if (bonus < 1 || bonus > Lotto.ALL_LOTTO_NUMBER_SIZE) {
-                outputView.printOutOfRangeLottoNumberMessage();
-                continue;
+            try {
+                BonusNumber bonus = new BonusNumber(inputView.getInputBonusNumber());
+                bonus.mustNotDuplicate(winningNumbers.values());
+                return bonus;
+            } catch (IllegalArgumentException e) {
+                String message = e.getMessage();
+                outputView.printErrorMessage(message);
             }
-            if (winningNumbers.contains(bonus)) {
-                outputView.printDuplicateLottoNumberMessage();
-                continue;
-            }
-            return bonus;
         }
     }
 
-    private List<Lotto> getValidPurchasedTickets(int purchaseAmount) {
-        int total = CalculateTicketCount.calculateTicketCount(purchaseAmount, PRICE_PER_TICKET);
+    private List<Lotto> getValidPurchasedTickets(Money purchaseAmount) {
+        int total = purchaseAmount.calculateTicketCount(PRICE_PER_TICKET);
 
         outputView.printManualCountMessage();
         int manual = getValidLottoTicketCount(total);
@@ -85,47 +79,40 @@ public class LottoController {
     }
 
     private int getValidLottoTicketCount(int purchasedTicketCount) {
-        int manualCount;
-        do {
-            manualCount = inputView.getInputManualLottoCount();
-            if (manualCount < 0 || manualCount > purchasedTicketCount) {
-                outputView.printInvalidManualCountMessage();
+        while (true) {
+            try {
+                int manualCount = inputView.getInputManualLottoCount();
+                ManualCount manual = new ManualCount(manualCount);
+                manual.validateAgainstTotal(purchasedTicketCount);
+                return manual.value();
+            } catch (IllegalArgumentException e) {
+                String message = e.getMessage();
+                outputView.printErrorMessage(message);
             }
-        } while (manualCount < 0 || manualCount > purchasedTicketCount);
-        return manualCount;
+        }
     }
 
-    private int getValidPurchaseAmount() {
-        int purchaseAmount;
-        do {
+    private Money getValidPurchaseAmount() {
+        while (true) {
             outputView.printPurchaseMessage();
-            purchaseAmount = inputView.getInputMoney();
-            if (purchaseAmount <= 0) {
-                outputView.printInvalidPurchaseAmountMessage();
+            try {
+                return new Money(inputView.getInputMoney());
+            } catch (IllegalArgumentException e) {
+                String message = e.getMessage();
+                outputView.printErrorMessage(message);
             }
-        } while (purchaseAmount <= 0);
-        return purchaseAmount;
+        }
     }
 
-    private List<Integer> getValidWinningNumbers() {
+    private WinningNumbers getValidWinningNumbers() {
         while (true) {
             try {
                 outputView.printTargetNumberMessage();
                 String rawInput = inputView.getInputTargetNumber();
-                List<Integer> parsedNumbers = ParseInputStringToNumbers.parse(rawInput);
-                new Lotto(parsedNumbers);
-                return parsedNumbers;
+                return new WinningNumbers(ParseInputStringToNumbers.parse(rawInput));
             } catch (IllegalArgumentException e) {
                 String message = e.getMessage();
-                if (message.contains("6개")) {
-                    outputView.printInvalidLottoSizeMessage();
-                } else if (message.contains("중복")) {
-                    outputView.printDuplicateLottoNumberMessage();
-                } else if (message.contains("1이상 45이하")) {
-                    outputView.printOutOfRangeLottoNumberMessage();
-                } else {
-                    System.out.println("[ERROR] " + message);
-                }
+                outputView.printErrorMessage(message);
             }
         }
     }
@@ -140,15 +127,7 @@ public class LottoController {
                 return ManualLottoTicketsGenerator.createManualTickets(lines);
             } catch (IllegalArgumentException e) {
                 String message = e.getMessage();
-                if (message.contains("6개")) {
-                    outputView.printInvalidLottoSizeMessage();
-                } else if (message.contains("중복")) {
-                    outputView.printDuplicateLottoNumberMessage();
-                } else if (message.contains("1이상 45이하")) {
-                    outputView.printOutOfRangeLottoNumberMessage();
-                } else {
-                    System.out.println("[ERROR] " + message);
-                }
+                outputView.printErrorMessage(message);
             }
         }
     }

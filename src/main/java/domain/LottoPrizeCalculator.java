@@ -13,11 +13,11 @@ public class LottoPrizeCalculator {
         public float returnRate;
     }
 
-    public Result calculate(List<Lotto> tickets, List<Integer> targetNumbers, int paidAmount, int bonusNumber) {
+    public Result calculate(List<Lotto> tickets, WinningNumbers winningNumbers, Money paidAmount, BonusNumber bonusNumber) {
         Result result = new Result();
 
         for (Lotto ticket : tickets) {
-            int matched = ticket.countMatches(targetNumbers);
+            int matched = ticket.countMatches(winningNumbers);
             boolean bonusNumberMatched = ticket.isBonusNumberMatched(bonusNumber);
 
             MatchReward reward = MatchReward.of(matched,bonusNumberMatched);
@@ -30,7 +30,7 @@ public class LottoPrizeCalculator {
             result.totalPrizeAmount += rewardToPrize(reward);
         }
 
-        result.returnRate = returnRate(paidAmount, (int) result.totalPrizeAmount);
+        result.returnRate = returnRate(paidAmount.value(), (int) result.totalPrizeAmount);
         return result;
     }
 
