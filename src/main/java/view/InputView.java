@@ -14,4 +14,10 @@ public class InputView {
         String inputTargetNumber = scanner.nextLine().trim();
         return inputTargetNumber;
     }
+
+    public int getInputBonusNumber(){
+        int bonusNumber = scanner.nextInt();
+        scanner.nextLine();
+        return bonusNumber;
+    }
 }
