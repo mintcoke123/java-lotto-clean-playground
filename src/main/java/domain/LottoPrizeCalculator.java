@@ -7,7 +7,6 @@ public class LottoPrizeCalculator {
         public int threeMatchCount;
         public int fourMatchCount;
         public int fiveMatchCount;
-
         public int fiveBonusMatchCount;
         public int sixMatchCount;
         public long totalPrizeAmount;
