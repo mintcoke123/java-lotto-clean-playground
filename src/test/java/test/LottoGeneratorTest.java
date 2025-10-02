@@ -41,7 +41,7 @@ class LottoGeneratorTest {
         int ticketCount = 14;
 
         // when
-        List<Lotto> tickets = generator.generateLottoTickets(ticketCount);
+        List<Lotto> tickets = generator.generateAutoLottoTickets(ticketCount);
 
         // then
         assertEquals(ticketCount, tickets.size());
@@ -60,7 +60,7 @@ class LottoGeneratorTest {
         AutoLottoTicketsGenerator generator = new AutoLottoTicketsGenerator();
 
         // when
-        List<Lotto> tickets = generator.generateLottoTickets(0);
+        List<Lotto> tickets = generator.generateAutoLottoTickets(0);
 
         // then
         assertTrue(tickets.isEmpty());

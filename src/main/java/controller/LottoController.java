@@ -28,29 +28,11 @@ public class LottoController {
     }
 
     public void run() {
-        // 1) 금액 입력
         int purchaseAmount = getValidPurchaseAmount();
-
-        // 2) 티켓 생성 및 출력
-        int purchasedTicketCount = CalculateTicketCount.calculateTicketCount(purchaseAmount, PRICE_PER_TICKET);
-        outputView.printManualCountMessage();
-        int manualLottoTicketCount = inputView.getInputManualLottoCount();
-        int autoLottoTicketCount = purchasedTicketCount - manualLottoTicketCount;
-        outputView.printPurchasedTicketsMessage(manualLottoTicketCount, autoLottoTicketCount);
-        List<Lotto> manualLottoTickets = getManualTickets(manualLottoTicketCount);
-        List<Lotto> autoLottoTickets = lottoGenerator.generateAutoLottoTickets(autoLottoTicketCount);
-        List<Lotto> purchasedTickets = new ArrayList<>(manualLottoTickets);
-        purchasedTickets.addAll(autoLottoTickets);
-        outputView.printLottoNumbers(purchasedTickets);
-
-        // 3-1) 당첨 번호 입력
+        List<Lotto> purchasedTickets = getValidPurchasedTickets(purchaseAmount);
         List<Integer> winningNumbers = getValidWinningNumbers();
+        int bonusNumber = getValidBonusNumber(winningNumbers);
 
-        // 3-2) 보너스 번호 입력
-        outputView.printBonusNumberMessage();
-        int bonusNumber = inputView.getInputBonusNumber();
-
-        // 4) 수익률
         LottoPrizeCalculator lottoPrizeCalculator = new LottoPrizeCalculator();
         LottoPrizeCalculator.Result result = lottoPrizeCalculator.calculate(purchasedTickets, winningNumbers, purchaseAmount,bonusNumber);
 
@@ -61,6 +43,52 @@ public class LottoController {
         outputView.printBonusResultMessage(5,MatchReward.BONUSFIVE.getPrize(), result.fiveBonusMatchCount);
         outputView.printResultMessage(6, MatchReward.SIX.getPrize(), result.sixMatchCount);
         outputView.printTotalBenefitResultMessage(result.returnRate);
+    }
+
+    private int getValidBonusNumber(List<Integer> winningNumbers) {
+        while (true) {
+            outputView.printBonusNumberMessage();
+            int bonus = inputView.getInputBonusNumber();
+            if (bonus < 1 || bonus > Lotto.ALL_LOTTO_NUMBER_SIZE) {
+                outputView.printOutOfRangeLottoNumberMessage();
+                continue;
+            }
+            if (winningNumbers.contains(bonus)) {
+                outputView.printDuplicateLottoNumberMessage();
+                continue;
+            }
+            return bonus;
+        }
+    }
+
+    private List<Lotto> getValidPurchasedTickets(int purchaseAmount) {
+        int total = CalculateTicketCount.calculateTicketCount(purchaseAmount, PRICE_PER_TICKET);
+
+        outputView.printManualCountMessage();
+        int manual = getValidLottoTicketCount(total);
+        int auto = total - manual;
+
+        outputView.printPurchasedTicketsMessage(manual, auto);
+
+        List<Lotto> manualLottoTickets = getValidManualTickets(manual);
+        List<Lotto> autoLottoTickets = lottoGenerator.generateAutoLottoTickets(auto);
+
+        List<Lotto> purchasedTickets = new ArrayList<>(manualLottoTickets);
+        purchasedTickets.addAll(autoLottoTickets);
+
+        outputView.printLottoNumbers(purchasedTickets);
+        return purchasedTickets;
+    }
+
+    private int getValidLottoTicketCount(int purchasedTicketCount) {
+        int manualCount;
+        do {
+            manualCount = inputView.getInputManualLottoCount();
+            if (manualCount < 0 || manualCount > purchasedTicketCount) {
+                outputView.printInvalidManualCountMessage();
+            }
+        } while (manualCount < 0 || manualCount > purchasedTicketCount);
+        return manualCount;
     }
 
     private int getValidPurchaseAmount() {
@@ -98,12 +126,26 @@ public class LottoController {
         }
     }
 
-    private List<Lotto> getManualTickets(int manualCount) {
-        List<Lotto> manualTickets = new ArrayList<>();
-        if (manualCount == 0) return manualTickets;
+    private List<Lotto> getValidManualTickets(int manualCount) {
+        if (manualCount == 0) return List.of();
 
-        outputView.printManualNumberMessage();
-        List<String> lottoNumberLines = inputView.getInputManualLottoNumbers(manualCount);
-        return ManualLottoTicketsGenerator.createManualTickets(lottoNumberLines);
+        while (true) {
+            outputView.printManualNumberMessage();
+            List<String> lines = inputView.getInputManualLottoNumbers(manualCount);
+            try {
+                return ManualLottoTicketsGenerator.createManualTickets(lines);
+            } catch (IllegalArgumentException e) {
+                String message = e.getMessage();
+                if (message.contains("6개")) {
+                    outputView.printInvalidLottoSizeMessage();
+                } else if (message.contains("중복")) {
+                    outputView.printDuplicateLottoNumberMessage();
+                } else if (message.contains("1이상 45이하")) {
+                    outputView.printOutOfRangeLottoNumberMessage();
+                } else {
+                    System.out.println("[ERROR] " + message);
+                }
+            }
+        }
     }
 }

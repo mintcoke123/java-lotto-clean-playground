@@ -77,4 +77,8 @@ public class OutputView {
     public void printInvalidPurchaseAmountMessage() {
         System.out.println("[ERROR] 금액은 자연수여야 합니다.");
     }
+
+    public void printInvalidManualCountMessage(){
+        System.out.println("[ERROR] 수동 로또 티켓의 갯수가 유효하지 않습니다.");
+    }
 }
