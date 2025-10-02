@@ -19,6 +19,10 @@ public class OutputView {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
     }
 
+    public void printBonusNumberMessage(){
+        System.out.println("보너스 볼을 입력해 주세요.");
+    }
+
     public void printStatusMessage(){
         System.out.println("당첨 통계");
         System.out.println("---------");
@@ -26,6 +30,11 @@ public class OutputView {
 
     public void printResultMessage(int correctNumber, int price, int count) {
         String message = String.format("%d개 일치 (%d원) - %d개%n", correctNumber, price, count);
+        System.out.println(message);
+    }
+
+    public void printBonusResultMessage(int correctNumber, int price, int count){
+        String message = String.format("%d개 일치, 보너스 볼 일치 (%d원) - %d개%n", correctNumber, price, count);
         System.out.println(message);
     }
 
@@ -40,6 +49,8 @@ public class OutputView {
         }
         System.out.println();
     }
+
+
 
     public void printInvalidLottoSizeMessage() {
         System.out.println("[ERROR] 로또 번호는 6개여야 합니다.");
