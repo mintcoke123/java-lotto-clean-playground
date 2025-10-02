@@ -1,4 +1,4 @@
-package domain;
+package domain.value;
 
 public record ManualCount(int value) {
     public ManualCount {

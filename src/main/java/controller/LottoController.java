@@ -1,6 +1,10 @@
 package controller;
 
 import domain.*;
+import domain.value.BonusNumber;
+import domain.value.ManualCount;
+import domain.value.Money;
+import domain.value.WinningNumbers;
 import generator.AutoLottoTicketsGenerator;
 import generator.ManualLottoTicketsGenerator;
 import view.InputView;

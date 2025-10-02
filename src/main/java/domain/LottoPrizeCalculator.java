@@ -1,5 +1,9 @@
 package domain;
 
+import domain.value.BonusNumber;
+import domain.value.Money;
+import domain.value.WinningNumbers;
+
 import java.util.List;
 
 public class LottoPrizeCalculator {
