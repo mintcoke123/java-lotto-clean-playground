@@ -1,12 +1,11 @@
 package test;
 
 import domain.Lotto;
-import generator.LottoGenerator;
+import generator.AutoLottoTicketsGenerator;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -22,7 +21,7 @@ class LottoGeneratorTest {
     @Test
     void 한장_생성하면_숫자_6개_범위_중복없고_정렬되어_있다() {
         // given
-        LottoGenerator generator = new LottoGenerator();
+        AutoLottoTicketsGenerator generator = new AutoLottoTicketsGenerator();
 
         // when
         Lotto lotto = new Lotto(generator.generateSixLottoNumber());
@@ -38,7 +37,7 @@ class LottoGeneratorTest {
     @Test
     void 여러장_생성하면_요청한_개수만큼_반환한다() {
         // given
-        LottoGenerator generator = new LottoGenerator();
+        AutoLottoTicketsGenerator generator = new AutoLottoTicketsGenerator();
         int ticketCount = 14;
 
         // when
@@ -58,7 +57,7 @@ class LottoGeneratorTest {
     @Test
     void 개수가_0이면_빈_리스트를_반환한다() {
         // given
-        LottoGenerator generator = new LottoGenerator();
+        AutoLottoTicketsGenerator generator = new AutoLottoTicketsGenerator();
 
         // when
         List<Lotto> tickets = generator.generateLottoTickets(0);

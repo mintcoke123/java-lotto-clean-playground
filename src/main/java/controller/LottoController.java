@@ -4,8 +4,9 @@ import domain.CalculateTicketCount;
 import domain.Lotto;
 import domain.MatchReward;
 import domain.ParseInputStringToNumbers;
-import generator.LottoGenerator;
+import generator.AutoLottoTicketsGenerator;
 import domain.LottoPrizeCalculator;
+import generator.ManualLottoTicketsGenerator;
 import view.InputView;
 import view.OutputView;
 
@@ -18,9 +19,9 @@ public class LottoController {
 
     private final InputView inputView;
     private final OutputView outputView;
-    private final LottoGenerator lottoGenerator;
+    private final AutoLottoTicketsGenerator lottoGenerator;
 
-    public LottoController(InputView inputView, OutputView outputView, LottoGenerator lottoGenerator) {
+    public LottoController(InputView inputView, OutputView outputView, AutoLottoTicketsGenerator lottoGenerator) {
         this.inputView = inputView;
         this.outputView = outputView;
         this.lottoGenerator = lottoGenerator;
@@ -37,7 +38,7 @@ public class LottoController {
         int autoLottoTicketCount = purchasedTicketCount - manualLottoTicketCount;
         outputView.printPurchasedTicketsMessage(manualLottoTicketCount, autoLottoTicketCount);
         List<Lotto> manualLottoTickets = getManualTickets(manualLottoTicketCount);
-        List<Lotto> autoLottoTickets = lottoGenerator.generateLottoTickets(autoLottoTicketCount);
+        List<Lotto> autoLottoTickets = lottoGenerator.generateAutoLottoTickets(autoLottoTicketCount);
         List<Lotto> purchasedTickets = new ArrayList<>(manualLottoTickets);
         purchasedTickets.addAll(autoLottoTickets);
         outputView.printLottoNumbers(purchasedTickets);
@@ -103,11 +104,6 @@ public class LottoController {
 
         outputView.printManualNumberMessage();
         List<String> lottoNumberLines = inputView.getInputManualLottoNumbers(manualCount);
-
-        for (String lottoNumberLine : lottoNumberLines) {
-            List<Integer> manualLottoNumbers = ParseInputStringToNumbers.parse(lottoNumberLine);
-            manualTickets.add(new Lotto(manualLottoNumbers));
-        }
-        return manualTickets;
+        return ManualLottoTicketsGenerator.createManualTickets(lottoNumberLines);
     }
 }
