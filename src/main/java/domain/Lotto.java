@@ -13,6 +13,13 @@ public class Lotto {
         this.numbers = numbers;
     }
 
+    public boolean isBonusNumberMatched (int bonusNumber){
+        if(numbers.contains(bonusNumber)){
+            return true;
+        }
+        return false;
+    }
+
     public int countMatches(List<Integer> targetNumbers) {
         int count = 0;
         for (int singleTargetNumber : targetNumbers)
