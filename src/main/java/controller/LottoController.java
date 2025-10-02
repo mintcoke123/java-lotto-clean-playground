@@ -9,6 +9,7 @@ import domain.LottoPrizeCalculator;
 import view.InputView;
 import view.OutputView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class LottoController {
@@ -31,8 +32,14 @@ public class LottoController {
 
         // 2) 티켓 생성 및 출력
         int purchasedTicketCount = CalculateTicketCount.calculateTicketCount(purchaseAmount, PRICE_PER_TICKET);
-        outputView.printPurchasedTicketsMessage(purchasedTicketCount);
-        List<Lotto> purchasedTickets = lottoGenerator.generateLottoTickets(purchasedTicketCount);
+        outputView.printManualCountMessage();
+        int manualLottoTicketCount = inputView.getInputManualLottoCount();
+        int autoLottoTicketCount = purchasedTicketCount - manualLottoTicketCount;
+        outputView.printPurchasedTicketsMessage(manualLottoTicketCount, autoLottoTicketCount);
+        List<Lotto> manualLottoTickets = getManualTickets(manualLottoTicketCount);
+        List<Lotto> autoLottoTickets = lottoGenerator.generateLottoTickets(autoLottoTicketCount);
+        List<Lotto> purchasedTickets = new ArrayList<>(manualLottoTickets);
+        purchasedTickets.addAll(autoLottoTickets);
         outputView.printLottoNumbers(purchasedTickets);
 
         // 3-1) 당첨 번호 입력
@@ -88,5 +95,19 @@ public class LottoController {
                 }
             }
         }
+    }
+
+    private List<Lotto> getManualTickets(int manualCount) {
+        List<Lotto> manualTickets = new ArrayList<>();
+        if (manualCount == 0) return manualTickets;
+
+        outputView.printManualNumberMessage();
+        List<String> lottoNumberLines = inputView.getInputManualLottoNumbers(manualCount);
+
+        for (String lottoNumberLine : lottoNumberLines) {
+            List<Integer> manualLottoNumbers = ParseInputStringToNumbers.parse(lottoNumberLine);
+            manualTickets.add(new Lotto(manualLottoNumbers));
+        }
+        return manualTickets;
     }
 }

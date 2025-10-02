@@ -19,6 +19,12 @@ public class InputView {
         return inputTargetNumber;
     }
 
+    public int getInputManualLottoCount() {
+        int inputManualLottoCount = scanner.nextInt();
+        scanner.nextLine();
+        return inputManualLottoCount;
+    }
+
     public List<String> getInputManualLottoNumbers(int ManualLottoCount) {
         List<String> inputManualLottoNumbers = new ArrayList<>();
         for(int i = 0; i < ManualLottoCount; i++) {
