@@ -17,7 +17,12 @@ public class LottoPrizeCalculator {
         public float returnRate;
     }
 
-    public Result calculate(List<Lotto> tickets, WinningNumbers winningNumbers, Money paidAmount, BonusNumber bonusNumber) {
+    public Result calculate(
+            List<Lotto> tickets,
+            WinningNumbers winningNumbers,
+            Money paidAmount,
+            BonusNumber bonusNumber
+    ) {
         Result result = new Result();
 
         for (Lotto ticket : tickets) {
@@ -26,10 +31,10 @@ public class LottoPrizeCalculator {
 
             MatchReward reward = MatchReward.of(matched, bonusNumberMatched);
             if (reward == MatchReward.THREE) result.threeMatchCount++;
-            if (reward == MatchReward.FOUR)  result.fourMatchCount++;
-            if (reward == MatchReward.FIVE)  result.fiveMatchCount++;
+            if (reward == MatchReward.FOUR) result.fourMatchCount++;
+            if (reward == MatchReward.FIVE) result.fiveMatchCount++;
             if (reward == MatchReward.BONUSFIVE) result.fiveBonusMatchCount++;
-            if (reward == MatchReward.SIX)   result.sixMatchCount++;
+            if (reward == MatchReward.SIX) result.sixMatchCount++;
 
             result.totalPrizeAmount += rewardToPrize(reward);
         }
