@@ -1,6 +1,8 @@
 package test;
 
 import domain.Lotto;
+import domain.value.BonusNumber;
+import domain.value.WinningNumbers;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -35,6 +37,35 @@ class LottoTest {
         // when & then
         assertThrows(IllegalArgumentException.class, () -> new Lotto(duplication));
     }
+
+    @Test
+    void 보너스번호가_포함되면_true를_반환한다() {
+        Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+        BonusNumber bonus = new BonusNumber(6);
+        assertTrue(lotto.isBonusNumberMatched(bonus));
+    }
+
+    @Test
+    void 보너스번호가_포함되지않으면_false를_반환한다() {
+        Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+        BonusNumber bonus = new BonusNumber(7);
+        assertFalse(lotto.isBonusNumberMatched(bonus));
+    }
+
+    @Test
+    void 당첨번호와_3개_일치하면_count는_3이다() {
+        Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 10, 20, 30));
+        WinningNumbers winning = new WinningNumbers(Arrays.asList(1, 2, 3, 40, 41, 42));
+        assertEquals(3, lotto.countMatches(winning));
+    }
+
+    @Test
+    void 당첨번호와_전혀_일치하지않으면_count는_0이다() {
+        Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 10, 20, 30));
+        WinningNumbers winning = new WinningNumbers(Arrays.asList(40, 41, 42, 43, 44, 45));
+        assertEquals(0, lotto.countMatches(winning));
+    }
+
 
 
 
