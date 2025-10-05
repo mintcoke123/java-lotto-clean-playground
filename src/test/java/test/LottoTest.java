@@ -66,7 +66,21 @@ class LottoTest {
         assertEquals(0, lotto.countMatches(winning));
     }
 
+    @Test
+    void 숫자에_0이_포함되면_예외가_발생한다() {
+        // given
+        List<Integer> numbers = Arrays.asList(0, 2, 3, 4, 5, 6);
+        // when & then
+        assertThrows(IllegalArgumentException.class, () -> new Lotto(numbers));
+    }
 
+    @Test
+    void 숫자에_46이_포함되면_예외가_발생한다() {
+        // given
+        List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 46);
+        // when & then
+        assertThrows(IllegalArgumentException.class, () -> new Lotto(numbers));
+    }
 
 
 }
