@@ -1,4 +1,4 @@
-package test;
+package test.domain;
 
 import domain.Lotto;
 import domain.LottoPrizeCalculator;
@@ -6,12 +6,16 @@ import domain.MatchReward;
 import domain.value.BonusNumber;
 import domain.value.Money;
 import domain.value.WinningNumbers;
+import org.junit.jupiter.api.DisplayNameGeneration;
+import org.junit.jupiter.api.DisplayNameGenerator;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@SuppressWarnings("NonAsciiCharacters")
+@DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
 class LottoPrizeCalculatorTest {
 
     @Test

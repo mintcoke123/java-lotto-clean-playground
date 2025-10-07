@@ -1,7 +1,9 @@
-package test;
+package test.generator;
 
 import domain.Lotto;
 import generator.AutoLottoTicketsGenerator;
+import org.junit.jupiter.api.DisplayNameGeneration;
+import org.junit.jupiter.api.DisplayNameGenerator;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashSet;
@@ -9,6 +11,8 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@SuppressWarnings("NonAsciiCharacters")
+@DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
 class LottoGeneratorTest {
 
     private static boolean isSorted(List<Integer> numbers) {

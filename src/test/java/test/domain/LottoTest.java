@@ -1,8 +1,10 @@
-package test;
+package test.domain;
 
 import domain.Lotto;
 import domain.value.BonusNumber;
 import domain.value.WinningNumbers;
+import org.junit.jupiter.api.DisplayNameGeneration;
+import org.junit.jupiter.api.DisplayNameGenerator;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -10,6 +12,8 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@SuppressWarnings("NonAsciiCharacters")
+@DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
 class LottoTest {
 
     @Test
@@ -81,6 +85,5 @@ class LottoTest {
         // when & then
         assertThrows(IllegalArgumentException.class, () -> new Lotto(numbers));
     }
-
 
 }
