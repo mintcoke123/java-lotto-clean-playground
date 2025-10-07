@@ -1,10 +1,5 @@
 package domain;
 
-@FunctionalInterface
-interface MatchRule {
-    boolean matches(int matchCount, boolean isBonusMatched);
-}
-
 public enum MatchReward {
     THREE(3, 5_000, (matchCount, isBonusMatched) -> matchCount == 3),
     FOUR(4, 50_000, (matchCount, isBonusMatched) -> matchCount == 4),
@@ -33,4 +28,11 @@ public enum MatchReward {
     public int getPrize() {
         return prize;
     }
+
+    @FunctionalInterface
+    interface MatchRule {
+        boolean matches(int matchCount, boolean isBonusMatched);
+    }
 }
+
+
