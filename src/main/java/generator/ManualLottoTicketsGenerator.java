@@ -1,7 +1,7 @@
 package generator;
 
 import domain.Lotto;
-import domain.ParseInputStringToNumbers;
+import utils.ParseInputStringToNumbers;
 
 import java.util.ArrayList;
 import java.util.List;

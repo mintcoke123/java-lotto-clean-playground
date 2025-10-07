@@ -7,6 +7,7 @@ import domain.value.Money;
 import domain.value.WinningNumbers;
 import generator.AutoLottoTicketsGenerator;
 import generator.ManualLottoTicketsGenerator;
+import utils.ParseInputStringToNumbers;
 import view.InputView;
 import view.OutputView;
 
