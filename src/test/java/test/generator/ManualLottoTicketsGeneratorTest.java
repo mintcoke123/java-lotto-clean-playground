@@ -5,6 +5,7 @@ import generator.ManualLottoTicketsGenerator;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator;
 import org.junit.jupiter.api.Test;
+import static org.assertj.core.api.SoftAssertions.assertSoftly;
 
 import java.util.List;
 
@@ -26,9 +27,13 @@ class ManualLottoTicketsGeneratorTest {
         List<Lotto> manualTickets = ManualLottoTicketsGenerator.createManualTickets(lottoNumberLines);
 
         // then
-        assertEquals(2, manualTickets.size());
-        assertEquals(List.of(1, 2, 3, 4, 5, 6), manualTickets.get(0).getNumbers());
-        assertEquals(List.of(7, 8, 9, 10, 11, 12), manualTickets.get(1).getNumbers());
+        assertSoftly(softly -> {
+            softly.assertThat(manualTickets).hasSize(2);
+            softly.assertThat(manualTickets.get(0).getNumbers())
+                    .containsExactly(1, 2, 3, 4, 5, 6);
+            softly.assertThat(manualTickets.get(1).getNumbers())
+                    .containsExactly(7, 8, 9, 10, 11, 12);
+        });
     }
 
     @Test
